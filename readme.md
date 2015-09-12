@@ -38,6 +38,15 @@ Usage: zip filename.zip .
 Usage: zip filename.zip
 Currently the only locations accepted are nothing or . which should map to the games working directory.
 
+**Note:** The files in the root of the zip should be considered as folders going straight into the game directory.
+For example if your zip contains
+G01_GFONT\BADWORD.DAT
+G01_GFONT\MESSAGE.DAT
+G01_GFONT\TIP.DAT
+
+Then it would overwrite those files.
+Please do not have empty directorys.
+
 **Note:** In the future it would be possible to download but not extract the zip file.
 And ask it first for files before downloading getting them from the patch server.
 
@@ -65,12 +74,17 @@ If the patch was a success patching will continue with the next patch.
 
 
 
-
-
-
-
-
 Later on we will have these.
+
+## rm
+
+Remove a file.
+** Great care should be taken with the remove commands.... they should only work in game folder and definatly double check them!!! *
+
+## rmdir
+
+Remove a directory.
+** Great care should be taken with the remove commands.... they should only work in game folder and definatly double check them!!! *
 
 ## diff
 ## zdiff
