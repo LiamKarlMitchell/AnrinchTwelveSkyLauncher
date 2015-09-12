@@ -1,0 +1,23 @@
+{
+  "name": "AnrinchTwelveSkyLauncher",
+  "window": {
+    "width": 1024,
+    "height": 700,
+    "show": false,
+    "frame": false,
+    "resizable": false,
+    "toolbar": false
+  },
+  "main": "index.html",
+  "dependencies": {
+    "async": "^0.2.10",
+    "extract-zip": "^1.0.3",
+    "ini": "^1.1.0",
+    "mkpath": "^0.1.0",
+    "net-ping": "^1.1.11",
+    "ping-wrapper": "0.0.2",
+    "sprintf-js": "0.0.7",
+    "status-bar": "^2.0.3",
+    "tmp": "0.0.27"
+  }
+}

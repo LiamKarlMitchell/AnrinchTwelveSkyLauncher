@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Twelve Sky Launcher - Infinite Sky</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+    </head>
+    <body>
+        <div class="root">
+            <div class="draggable"></div>
+            <div class="header">
+                <div class="logo"></div>
+                <button class="debug"></button>
+                <!--<button id="btnMinimize" class="minimize">&#45;</button>-->
+                <button id="btnClose" class="exit">&nbsp;</button>
+                <div class="server"><i bubble></i><span class="server_name">...</span></div>
+                <div class="session">
+                    <span class="info">Logged in as:<span class="name">username</span></span>
+                    <button class="logout"><i></i>Logout</button>
+                </div>
+                <ul class="nav">
+                    <li class="nav_notes"><i></i>PATCH NOTES</li>
+                    <li class="nav_server"><i></i>SERVER</li>
+                    <li class="nav_register"><i></i>REGISTER</li>
+                    <!--<li class="nav_item_mall"><i></i>ITEM MALL</li>-->
+                    <li class="nav_bug dropdown"><i></i>BUG REPORT
+                        <ul>
+                            <li id="navGameBug">Game bug</li>
+                            <li id="navLauncherBug">Launcher bug</li>
+                            <li id="navTranslationBug">Translation bug</li>
+                        </ul>
+                    </li>
+                    <li class="nav_options"><i></i>OPTIONS</li>
+                </ul>
+                </div><!-- header end -->
+                <div class="main">
+                    <div class="content_area">
+                        <div class="content login">
+                            <div class="left account_login_area">
+                                <h2>Login to server</h2>
+                                <form method="post" class="signin" action="#">
+                                    <fieldset class="textbox">
+                                        <label class="username">
+                                            <span><h1>Username</h1></span>
+                                            <input id="txtUsername" name="Username" value="" type="text">
+                                        </label>
+                                        <label class="password">
+                                            <span><h1>Password</h1></span>
+                                            <input id="txtPassword" name="password" value="" type="password">
+                                        </label>
+                                        <p>
+                                        <a class="forgot" href="#">Forgot your password?</a>
+                                        </p>
+                                        <label for="cheackbox_id">Remeber Me</label>
+                                        <input type="checkbox" name="checkbox" id="checkbox" value="value">
+                                        <button id="btnLogin"><h2>Login</h2></button>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div class="left register_account_area">
+                                <h2>Register an account</h2>
+                            </div>
+                        </div>
+                        <div class="content options">
+                            <h2>Login to server</h2>
+                            <form method="post" class="options" action="#">
+                                <fieldset class="textbox">
+                                    <label class="resolution">
+                                        <span><h1>ResolutionX</h1></span>
+                                        <input id="txtResolutionX" name="ResolutionX" value="" type="text">
+                                    </label>
+                                    <label class="resolution">
+                                        <span><h1>ResolutionY</h1></span>
+                                        <input id="txtResolutionY" name="ResolutionY" value="" type="text">
+                                    </label>
+                                    <label class="resolution">
+                                        <span><h1>Fullscreen</h1></span>
+                                        <checkbox id="chkFullscreen" name="Fullscreen" value="" type="text"></checkbox>
+                                    </label>
+                                    <button id="btnDefaultOptions"><h2>Default</h2></button>
+                                    <button id="btnSaveOptions"><h2>Save</h2></button>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div class="content patch_notes display_none">
+                            <div class="patch_notes_kr display_none">
+                                here comes korea patch notes
+                            </div>
+                            <div class="patch_notes_dll display_none">
+                                here come dll patch notes
+                            </div>
+                            <div class="patch_notes_launcher display_none">
+                                here comes laucnher patch notes
+                            </div>
+                        </div>
+                        <div class="content server_select display_none">
+                            <div>
+                            </div>
+                            <div id="_1" class="server_info">
+                                Here comes server
+                                <span class="name"></span><span class="ms">Ping</span>
+                            </div>
+                        </div>
+                        <div class="content item_mall display_none">
+                            here comes item mall
+                        </div>
+                        <div class="content bug_report display_none">
+                            <div class="bug_report_game display_none">game_report</div>
+                            <div class="bug_report_launcher display_none">launcher_report</div>
+                        </div>
+                        <div class="content settings display_none">
+                            here comes settings
+                        </div>
+                    </div>
+                    </div><!-- main end -->
+                    <div class="social">
+                        <button id="btnFacebook" class="facebook"></button>
+                        <!--<button class="twitter"></button>-->
+                        <button id="btnYoutube"class="youtube"></button>
+                    </div>
+                    <div class="footer">
+                        <div class="progress">
+                        <progress class="first red" value="0" max="100"></progress>
+                    <progress class="second" value="0" max="100"></progress>
+                    <div class="filename"></div>
+                    <div class="status" id="lblStatus">Please wait, checking for patches...</div>
+                    <div class="percent">...</div>
+                </div>
+                <button class="launch"><span id="btnLaunchText">PATCHING</span></button>
+                </div><!-- footer end -->
+            </div>
+        </div>
+        <script src="js/app.js"></script>
+    </body>
+</html>

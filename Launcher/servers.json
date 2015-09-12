@@ -1,0 +1,10 @@
+[
+	{
+		"name": "Anrinch - Nostalgia",
+		"country": "FR",
+		"domain": "ts1.anrinch.com",
+		"description": "A free to play server hosted in France.",
+		"patch": "http://patch.anrinch.com/ts1/",
+		"dir": "Anrinch"
+	}
+]
