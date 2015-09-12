@@ -183,7 +183,7 @@ $(document).ready(function() {
     var current_directory = process.cwd()
     try {
       process.chdir("../");
-      if (injector.executeInject("TwelveSky.exe /JOHNDOE/" + (localStorage.graphics.fullscreen ? 3 : 2) + "/" + (localStorage.graphics.resolution_x || 1024) + "/" + (localStorage.graphics.resolution_y || 768), "TS1_Client.dll")) {
+      if (injector.executeInject("TwelveSky.exe /_AEnt12/" + (localStorage.graphics.fullscreen ? 3 : 2) + "/" + (localStorage.graphics.resolution_x || 1024) + "/" + (localStorage.graphics.resolution_y || 768), "TS1_Client.dll")) {
         console.log('Process started and injected.');
       } else {
         console.log('Unable to execute and inject dll.');

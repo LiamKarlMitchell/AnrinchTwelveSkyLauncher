@@ -132,6 +132,11 @@ Patch.prototype.goPatch = function Patch_goPatch(callback) {
 			if (self.stopPatching) {
 				return false;
 			}
+
+			if (self.reload) {
+				return false;
+			}
+
 			console.log(self.currentVersion +' < '+ self.serverVersion);
 			return self.currentVersion < self.serverVersion;
 		},
@@ -175,6 +180,10 @@ Patch.prototype.goPatch = function Patch_goPatch(callback) {
 					//
 					var patchTaskQueue = async.queue(function(instruction, patchTaskQueueCallback) {
 						var arr;
+
+						if (self.stopPatching) {
+							return patchTaskQueueCallback(new Error('Stopping...'), null);
+						}
 
 						// 	   _    _           _
 						//    / \  | | ___ _ __| |_
@@ -290,9 +299,10 @@ Patch.prototype.goPatch = function Patch_goPatch(callback) {
 						// |  _ <| |___| |__| |_| / ___ \| |_| |
 						// |_| \_\_____|_____\___/_/   \_\____/
 						//
-						if (instruction === 'RELOAD') {
+						if (instruction === 'reload') {
 							emitter.emit('reload', true);
 							self.reload = true;
+							patchTaskQueueCallback(null);
 							return;
 						}
 
@@ -311,8 +321,12 @@ Patch.prototype.goPatch = function Patch_goPatch(callback) {
 						patchTaskQueue.push(instructions[i], function _patchQueueErr(err) {
 							if (err) {
 								console.log('Error with patch task: ' + err.message);
-								stopPatching = true;
-								processedPatchInfoCallback(err);
+								if (!self.stopPatching) {
+									patchTaskQueue.tasks.length = 0;
+									self.stopPatching = true;
+									processedPatchInfoCallback(err);
+									return false;
+								}
 							}
 						});
 					}
@@ -323,8 +337,6 @@ Patch.prototype.goPatch = function Patch_goPatch(callback) {
 							self.currentVersion++;
 							self.writeVersion();
 							processedPatchInfoCallback(null, true);
-						} else {
-							processedPatchInfoCallback(null, true)
 						}
 					};
 
