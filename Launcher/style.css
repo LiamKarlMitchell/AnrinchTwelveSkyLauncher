@@ -142,6 +142,7 @@ i[bubble][status='offline']{
 
 .nav_item_mall i{ background:url(img/tsx_item_bag.png); }
 .nav_server i{ background:url(img/tsx_server.png); }
+.nav_forums i{ background:url(img/tsx_server.png); }
 .nav_register i{ background:url(img/tsx_register.png); }
 .nav_notes i{ background:url(img/tsx_notes.png); }
 .nav_bug i{ background:url(img/tsx_bug.png); }

@@ -306,11 +306,22 @@ Patch.prototype.goPatch = function Patch_goPatch(callback) {
 							return;
 						}
 
-						// When all tasks done.
-						//self.currentVersion++;
+
+						//  _ __ _ __ ___
+						// | '__| '_ ` _ \
+						// | |  | | | | | |
+						// |_|  |_| |_| |_|
+						//
+						arr = /^rm ([\.\\A-Za-z0-9_ ]+)$/.exec(instruction);
+						if (arr !== null) {
+							var filepath = path.join('../', arr[1]);
+							console.log('Removing file: '+arr[1]);
+							fs.unlink(filepath, patchTaskQueueCallback);
+							return;
+						}
 
 						console.log('TODO: Code handling of this instruction: ' + instruction);
-						patchTaskQueueCallback(new Error('Aborting Patching '+patchVersion+' the following instruction is not recognized: '+instruction));
+						patchTaskQueueCallback(new Error('Aborting Patching '+patchVersion+' the following instruction is not recognized: '+instruction+' Launcher may be out of date.'));
 						return;
 					});
 

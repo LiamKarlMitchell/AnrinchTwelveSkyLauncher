@@ -32,8 +32,6 @@ function btnYoutube_click(event) {
 	gui.Shell.openExternal("https://www.youtube.com/channel/UCCvAaQbA2Z9Qw6bnvx06dNw");
 }
 
-
-
 function navGameBug_click(event) {
 	//Needs link to translation bugs on github
 	gui.Shell.openExternal("https://github.com/LiamKarlMitchell/InfiniteSky");
@@ -49,44 +47,12 @@ function navTranslationBug_click(event) {
 	gui.Shell.openExternal("https://github.com/LiamKarlMitchell/InfiniteSky");
 }
 
-
-
 function btnCommunity_click(event) {
 	gui.Shell.openExternal("https://ts1.anrinch.com/forums/");
 }
 
 function nav_register_click(event) {
 	gui.Shell.openExternal("https://anrinch.com/create-an-account/");
-}
-
-// Patching update download box example
-//$('.download_box').find('.name').text('Wahhh').end().find('.speed').text('90000 bps').end().find('.progress_bar').val(Math.random()*100);
-
-var downloads = [];
-
-function Download(type, url, doneFunction) {
-	// When finished downloading call doneFunction
-}
-
-Download.prototype.makeDom = function Download_makeDom() {
-	if (this.dom) return this.dom;
-	return this.dom = $('<h1>test</h1>');
-}
-
-function addDownload(type, version) {
-	// Create download dom and add it to the box.
-	// Start Download
-	// Switch case? generate url from type eg game, tsx client, launcher, translation file
-
-	var url = 'http://www.google.com';
-	var done = function() {
-		console.log('Finished downloading ' + type + ' ' + version);
-	};
-	var download = new Download(type, url, done);
-
-	$('#downloads_box .vscroll').append(download.makeDom());
-
-	downloads.push(download);
 }
 
 function showDialog(dialog_id) {
@@ -105,7 +71,7 @@ $(document).ready(function() {
 	$('#btnClose').click(btnClose_click);
 	$('#btnOptions').click(btnOptions_click);
 	//$('#btnRegister').click(btnRegister_click);
-	//$('#btnCommunity').click(btnCommunity_click);
+	$('#btnCommunity').click(btnCommunity_click);
 
 	$('#btnFacebook').click(btnFb_click);
 	$('#btnMinimize').click(btnMinimize_click);
