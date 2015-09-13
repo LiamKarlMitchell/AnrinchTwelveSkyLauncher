@@ -42,7 +42,7 @@ function navGameBug_click(event) {
 }
 
 function navLauncherBug_click(event) {
-	gui.Shell.openExternal("https://github.com/LiamKarlMitchell/InfiniteSky_Launcher/issues");
+	gui.Shell.openExternal("https://github.com/LiamKarlMitchell/AnrinchTwelveSkyLauncher/issues");
 }
 
 function navTranslationBug_click(event) {

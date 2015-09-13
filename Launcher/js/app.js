@@ -149,7 +149,7 @@ $('#btnDefaultOptions').click(resetDefaultOptions);
       if (goupdirectory) {
         process.chdir("../");
       }
-      if (injector.executeInject(GAME_EXE+" /_AEnt12/" + (localStorage.graphics_fullscreen ? 3 : 2) + "/" + (localStorage.graphics_resolution_x) + "/" + (localStorage.graphics_resolution_y), "TS1_Client.dll")) {
+      if (injector.executeInject(GAME_EXE+" /_AEnt12/" + (localStorage.graphics_fullscreen === 'true' ? 3 : 2) + "/" + (localStorage.graphics_resolution_x) + "/" + (localStorage.graphics_resolution_y), "TS1_Client.dll")) {
         console.log('Process started and injected.');
         window.close();
       } else {
