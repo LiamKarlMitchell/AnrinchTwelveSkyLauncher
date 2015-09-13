@@ -21,9 +21,9 @@
                     <button class="logout"><i></i>Logout</button>
                 </div>
                 <ul class="nav">
-                    <li class="nav_notes"><i></i>PATCH NOTES</li>
-                    <li class="nav_register"><i></i>REGISTER</li>
-                    <li class="nav_forums"><i></i>FORUMS</li>
+                    <li id="nav_notes" class="nav_notes"><i></i>PATCH NOTES</li>
+                    <li id="nav_register" class="nav_register"><i></i>REGISTER</li>
+                    <li id="nav_forums" class="nav_forums"><i></i>FORUMS</li>
                     <!--<li class="nav_item_mall"><i></i>ITEM MALL</li>-->
                     <li class="nav_bug dropdown"><i></i>BUG REPORT
                         <ul>
@@ -67,20 +67,41 @@
                             <h2>Login to server</h2>
                             <form method="post" class="options" action="#">
                                 <fieldset class="textbox">
-                                    <label class="resolution">
-                                        <span><h1>ResolutionX</h1></span>
-                                        <input id="txtResolutionX" name="ResolutionX" value="" type="text">
-                                    </label>
-                                    <label class="resolution">
-                                        <span><h1>ResolutionY</h1></span>
-                                        <input id="txtResolutionY" name="ResolutionY" value="" type="text">
-                                    </label>
-                                    <label class="resolution">
-                                        <span><h1>Fullscreen</h1></span>
-                                        <checkbox id="chkFullscreen" name="Fullscreen" value="" type="text"></checkbox>
-                                    </label>
-                                    <button id="btnDefaultOptions"><h2>Default</h2></button>
-                                    <button id="btnSaveOptions"><h2>Save</h2></button>
+                                    <table border="0">
+                                        <tr>
+                                            <td>
+                                                <label for="ResolutionX">ResolutionX</label>
+                                            </td>
+                                            <td>
+                                                <input id="txtResolutionX" name="ResolutionX" value="" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="ResolutionY">ResolutionY</label>
+                                            </td>
+                                            <td>
+                                                <input id="txtResolutionY" name="ResolutionY" value="" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="Fullscreen">Fullscreen</label>
+                                            </td>
+                                            <td>
+                                                <input id="chkFullscreen" type="checkbox" name="Fullscreen">Fullscreen
+                                            </td>
+                                        </tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                        <tr>
+                                            <td>
+                                                <button id="btnDefaultOptions"><h2>Default</h2></button>
+                                            </td>
+                                            <td><button id="btnSaveOptions"><h2>Save</h2></button></td>
+                                        </tr>
+                                    </table>
                                 </fieldset>
                             </form>
                         </div>

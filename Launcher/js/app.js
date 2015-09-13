@@ -15,16 +15,21 @@ var HTTPFileProgressDownload = require('./js/HTTPFileProgressDownload.js');
 var Patch = require('./js/patch.js');
 var config = {};
 
+//   ____                _              _
+//  / ___|___  _ __  ___| |_ __ _ _ __ | |_ ___
+// | |   / _ \| '_ \/ __| __/ _` | '_ \| __/ __|
+// | |__| (_) | | | \__ \ || (_| | | | | |_\__ \
+//  \____\___/|_| |_|___/\__\__,_|_| |_|\__|___/
 GAME_EXE = 'TwelveSky.exe';
 GRAPHICS_RESOLUTION_X = 1024;
 GRAPHICS_RESOLUTION_Y = 768;
-GRAPHICS_DEFAULT_FULLSCREEN = true;
-if (localStorage.graphics === undefined) {
-  localStorage.graphics = {
-    resolution_x: GRAPHICS_RESOLUTION_X,
-    resolution_y: GRAPHICS_RESOLUTION_Y,
-    fullscreen: GRAPHICS_DEFAULT_FULLSCREEN
-  };
+GRAPHICS_FULLSCREEN = false;
+
+if (localStorage.graphics === undefined) {  
+    localStorage.graphics = true;
+    localStorage.graphics_resolution_x = GRAPHICS_RESOLUTION_X;
+    localStorage.graphics_resolution_y = GRAPHICS_RESOLUTION_Y;
+    localStorage.graphics_fullscreen = GRAPHICS_FULLSCREEN;
 }
 
 var server = {
@@ -34,7 +39,6 @@ var server = {
 };
 
 $('.server .server_name').text(server.name);
-
 
 function restartApplication() {
   var child;
@@ -70,6 +74,7 @@ $(document).ready(function() {
   $('.content.login').show();
   // Disable start game button untill Launcher finishes patching process.
   $('.launch').prop('disabled', true);
+  
   win.on('close', function() {
     //this.hide(); // Pretend to be closed already
     // TODO Stop transfers & let last patch extract? As to not break any files?
@@ -101,6 +106,39 @@ $(document).ready(function() {
     $('#txtUsername').val(username);
   }
 
+function saveOptions(e) {
+  e.preventDefault();
+  var x = $('#txtResolutionX').val();
+  var y = $('#txtResolutionY').val();
+  if (!$.isNumeric(x)) {
+    alert('Please only enter a valid integer for resolution width.');
+    return;
+  }
+
+  if (!$.isNumeric(y)) {
+    alert('Please only enter a valid integer for resolution height.');
+    return;
+  }
+
+  x = Math.floor(x);
+  y = Math.floor(y);
+
+  localStorage.graphics_resolution_x = x;
+  localStorage.graphics_resolution_y = y;
+  localStorage.graphics_fullscreen = $('#chkFullscreen').prop('checked');
+}
+
+$('#btnSaveOptions').click(saveOptions);
+
+function resetDefaultOptions(e) {
+  e.preventDefault();
+  $('#txtResolutionX').val(GRAPHICS_RESOLUTION_X);
+  $('#txtResolutionY').val(GRAPHICS_RESOLUTION_Y);
+  $('#chkFullscreen').prop('checked', GRAPHICS_FULLSCREEN);
+}
+
+$('#btnDefaultOptions').click(resetDefaultOptions);
+
   // Check if we have to traverse up a directory.
   function launch(goupdirectory) {
     if (goupdirectory === undefined) {
@@ -111,7 +149,7 @@ $(document).ready(function() {
       if (goupdirectory) {
         process.chdir("../");
       }
-      if (injector.executeInject(GAME_EXE+" /_AEnt12/" + (localStorage.graphics.fullscreen ? 3 : 2) + "/" + (localStorage.graphics.resolution_x || 1024) + "/" + (localStorage.graphics.resolution_y || 768), "TS1_Client.dll")) {
+      if (injector.executeInject(GAME_EXE+" /_AEnt12/" + (localStorage.graphics_fullscreen ? 3 : 2) + "/" + (localStorage.graphics_resolution_x) + "/" + (localStorage.graphics_resolution_y), "TS1_Client.dll")) {
         console.log('Process started and injected.');
         window.close();
       } else {
