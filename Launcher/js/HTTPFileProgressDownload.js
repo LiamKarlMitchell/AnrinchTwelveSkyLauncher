@@ -71,10 +71,8 @@ function HTTPFileProgressDownload(url, onRender, onSuccess, onError) {
 				res.pipe(ws);
 				res.pipe(self.bar);
 
-				res.on('end', function(){
-					//setTimeout(function() { // Wait a brief amount to see if it fixes problem i was having accessing file fast after it downloaded.
+				ws.on('finish', function(){
 						onSuccess.call(self, self.path);
-					//}, 10);
 				});
 				break;
 				case 500:
