@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Anrinch Entertainment</title>
+    <script src="./js/jquery-1.11.2.min.js"></script>
+    <script src="./js/main.js"></script>
+
+    <script>
+    	var path = require('path');
+    	var fs = require('fs');
+    	var exec = require('child_process').exec;
+
+    	PATHS = {
+    		Client: path.resolve('./fake client/'),
+    		Launcher: path.resolve('./')
+    	};
+
+    	VERSION_FILE = path.resolve(PATHS.Client + '/version.dat');
+    	LAUNCHER_EXE = path.resolve(PATHS.Launcher + '/nw.exe');
+
+		var gui = require('nw.gui');
+		var win = gui.Window.get();
+		win.setMinimumSize(400, 500);
+		win.setResizable(false);
+		win.width = 400;
+		win.height = 500;
+		win.setPosition('center');
+
+		function restartApplication() {
+			var exec = require("child_process").exec;
+			try{
+				exec('cmd /K "'+LAUNCHER_EXE+'"');
+				win.hide();
+				gui.App.quit();
+			}catch(e){
+				alert('Error on restartApplication\n\r' + e.toString());
+			}
+		}
+
+    	var gui = require('nw.gui');
+		onload = function() {
+			$(document).ready(function(){
+				gui.Window.get().show();
+				app = new Launcher();
+				window.app = app;
+				app.ele.debug = true;
+
+				app.ele.minimize = $('#minimize');
+				app.ele.maximize = $('#maximize');
+				app.ele.close = $('#close');
+				app.ele.login = $('#login');
+				app.ele.signOut = $('#signOut');
+				app.ele.loginEmail = $('#loginEmail');
+				app.ele.loginPassword = $('#loginPassword');
+				app.ele.header = $('#header');
+				app.ele.progress = $('#progress span');
+				app.ele.minorProgress = $('#minor-progress span');
+				app.ele.status = $('#status');
+				app.ele.play = $('#play');
+
+				app.setScreen('Loading');
+
+				fs.readFile(VERSION_FILE, function(err, data){
+					var version = parseInt(data);
+					if(!version) version = 0;
+					app.version = version;
+
+					fs.writeFile(VERSION_FILE, !data ? 0 : data, function(err){
+						if(err){
+							exec('reg.exe add "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers" /v "'+LAUNCHER_EXE+'" /t REG_SZ /d "RUNASADMIN" /f', function(error, stdout, stderr){
+								if(error){
+									alert(error);
+									win.close();
+									return;
+								}
+
+								restartApplication();
+							});
+							return;
+						}
+
+						app.window();
+					});
+				});
+			});
+		}
+    </script>
+	<link rel="stylesheet" href="css.css">
+  </head>
+  <body>
+  	<div id="pages">
+  		<div id="border"></div>`
+  		<div id="resize"></div>
+	  	<div id="header"><div class="title"></div><div class="window-action"><div id="close"></div><div id="minimize"></div><div class="clear"></div></div></div>
+	  	<page slug="Login">
+	  		<div class="login-form">
+				<div class="username"><input type="text" placeholder="Your email" autofocus id="loginEmail"></div>
+				<div class="password"><input type="password" placeholder="Your password" id="loginPassword"></div>
+				<div class="button"><button type="submit" class="action" id="login">Submit</button></div>
+			</div>
+	  	</page>
+	  	<page slug="Loading">
+	  		<div id="loading"></div>
+	  	</page>
+		<page slug="Games">
+			<div class="shadow padding-top">
+				<ul id="games">
+					<li><a href="#" class="highlight">Twelve Sky</a></li>
+				</ul>
+				<div id="account"><span>Welcome</span> Przemyslaw <a href="javascript: void(0)" id="signOut">Sign out</a></div>
+				<div class="clear"></div>
+			</div>
+			<div class="game-background"></div>
+			<ul class="sub-menu">
+<!-- 				<li><a href="#" class="active">NEWS</a></li>
+				<li><a href="#">PATCH NOTES</a></li> -->
+				<li class="clear"></li>
+			</ul>
+			<div class="content">
+				<div class="shadow-right"></div>
+				<div class="shadow-left"></div>
+				<div id="next"></div>
+				<div id="previous"></div>
+				<div class="news">
+
+				</div>
+				<!-- <div class="patch-notes"></div> -->
+			</div>
+			<div class="status-bar">
+				<table>
+					<thead>
+						<tr>
+							<td class="bar">
+								<div id="status"></div>
+								<div id="progress"><span></span></div>
+								<div id="minor-progress"><span></span></div>
+							</td>
+							<td class="settings"><a href="#" id="settings"></a></td>
+							<td class="play"><button id="play" disabled>Play</button></td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+  		</page>
+  		<div class="clear"></div>
+  	</div>
+  </body>
+</html>
